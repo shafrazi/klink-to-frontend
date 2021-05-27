@@ -1,7 +1,9 @@
+import {useContext} from "react"
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import axios from 'axios';
 import {
   Box,
   Button,
@@ -14,8 +16,26 @@ import {
 import FacebookIcon from 'src/icons/Facebook';
 import GoogleIcon from 'src/icons/Google';
 
+import {AppContext} from "src/context"
+
 const Login = () => {
   const navigate = useNavigate();
+  const {baseUrl, setCurrentUser, setUserToken} = useContext(AppContext)
+
+  const handleLogin = (values, formObject) => {
+    const url = baseUrl + "/users/sign_in"
+    axios
+      .post(url, values)
+      .then((response) => {
+        setCurrentUser(response.data.user)
+        setUserToken(response.data.token)
+        navigate('/app/dashboard', { replace: true });
+      })
+      .catch((error) => {
+        console.log("Invalid email or password")
+        formObject.setSubmitting(false)
+      })
+  }
 
   return (
     <>
@@ -34,15 +54,15 @@ const Login = () => {
         <Container maxWidth="sm">
           <Formik
             initialValues={{
-              email: 'demo@devias.io',
-              password: 'Password123'
+              email: 'foo@bar.com',
+              password: 'foobar'
             }}
             validationSchema={Yup.object().shape({
               email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
               password: Yup.string().max(255).required('Password is required')
             })}
-            onSubmit={() => {
-              navigate('/app/dashboard', { replace: true });
+            onSubmit={(values, formObject) => {
+              handleLogin(values, formObject)
             }}
           >
             {({
@@ -149,9 +169,9 @@ const Login = () => {
                 <Box sx={{ py: 2 }}>
                   <Button
                     color="primary"
-                    disabled={isSubmitting}
                     fullWidth
                     size="large"
+                    disabled={isSubmitting}
                     type="submit"
                     variant="contained"
                   >
