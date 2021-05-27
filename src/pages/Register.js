@@ -1,4 +1,6 @@
+import {useContext} from "react"
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { Helmet } from 'react-helmet';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -13,13 +15,35 @@ import {
   Typography
 } from '@material-ui/core';
 
+import {AppContext} from "src/context"
+
 const Register = () => {
   const navigate = useNavigate();
+  const {currentUser, setCurrentUser, baseUrl} = useContext(AppContext)
+
+  const handleSignUp = (values, formObject) => {
+    const url = baseUrl + "/users"
+    const user = {
+      user: {
+        ...values
+      }
+    }
+    axios
+      .post(url, user)
+      .then((response) => {
+        etCurrentUser(response.data.user)
+        setUserToken(response.data.token)
+        navigate('/app/dashboard', { replace: true });
+      })
+      .catch((error) => {
+        formObject.setSubmitting(false)
+      })
+  }
 
   return (
     <>
       <Helmet>
-        <title>Register | Material Kit</title>
+        <title>Register | klink.to</title>
       </Helmet>
       <Box
         sx={{
@@ -34,22 +58,23 @@ const Register = () => {
           <Formik
             initialValues={{
               email: '',
-              firstName: '',
-              lastName: '',
+              first_name: '',
+              last_name: '',
               password: '',
               policy: false
             }}
             validationSchema={
               Yup.object().shape({
                 email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-                firstName: Yup.string().max(255).required('First name is required'),
-                lastName: Yup.string().max(255).required('Last name is required'),
+                first_name: Yup.string().max(255).required('First name is required'),
+                last_name: Yup.string().max(255).required('Last name is required'),
                 password: Yup.string().max(255).required('password is required'),
                 policy: Yup.boolean().oneOf([true], 'This field must be checked')
               })
             }
-            onSubmit={() => {
-              navigate('/app/dashboard', { replace: true });
+            onSubmit={(values, formObject) => {
+              // navigate('/app/dashboard', { replace: true });
+              handleSignUp(values, formObject)
             }}
           >
             {({
@@ -78,27 +103,27 @@ const Register = () => {
                   </Typography>
                 </Box>
                 <TextField
-                  error={Boolean(touched.firstName && errors.firstName)}
+                  error={Boolean(touched.first_name && errors.first_name)}
                   fullWidth
-                  helperText={touched.firstName && errors.firstName}
+                  helperText={touched.first_name && errors.first_name}
                   label="First name"
                   margin="normal"
-                  name="firstName"
+                  name="first_name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.firstName}
+                  value={values.first_name}
                   variant="outlined"
                 />
                 <TextField
-                  error={Boolean(touched.lastName && errors.lastName)}
+                  error={Boolean(touched.last_name && errors.last_name)}
                   fullWidth
-                  helperText={touched.lastName && errors.lastName}
+                  helperText={touched.last_name && errors.last_name}
                   label="Last name"
                   margin="normal"
-                  name="lastName"
+                  name="last_name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.lastName}
+                  value={values.last_name}
                   variant="outlined"
                 />
                 <TextField
