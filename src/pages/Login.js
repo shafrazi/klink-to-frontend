@@ -29,6 +29,7 @@ const Login = () => {
       .then((response) => {
         setCurrentUser(response.data.user)
         setUserToken(response.data.token)
+        window.localStorage.setItem("userToken", response.data.token);
         navigate('/app/dashboard', { replace: true });
       })
       .catch((error) => {

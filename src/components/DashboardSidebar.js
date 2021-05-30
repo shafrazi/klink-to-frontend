@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -7,6 +7,7 @@ import {
   Button,
   Divider,
   Drawer,
+  Hidden,
   List,
   Typography
 } from '@material-ui/core';
@@ -21,6 +22,8 @@ import {
   Users as UsersIcon
 } from 'react-feather';
 import NavItem from './NavItem';
+
+import { AppContext } from 'src/context';
 
 const user = {
   avatar: '/static/images/avatars/avatar_6.png',
@@ -73,6 +76,7 @@ const items = [
 
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {
   const location = useLocation();
+  const { setOpenModal, handleProductPageCreate } = useContext(AppContext);
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -149,9 +153,8 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
         >
           <Button
             color="primary"
-            component="a"
-            href="https://react-material-kit.devias.io"
             variant="contained"
+            onClick={handleProductPageCreate}
           >
             See PRO version
           </Button>
@@ -162,7 +165,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
 
   return (
     <>
-      <Box>
+      <Hidden lgUp>
         <Drawer
           anchor="left"
           onClose={onMobileClose}
@@ -176,8 +179,8 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
         >
           {content}
         </Drawer>
-      </Box>
-      <Box>
+      </Hidden>
+      <Hidden lgDown>
         <Drawer
           anchor="left"
           open
@@ -192,7 +195,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
         >
           {content}
         </Drawer>
-      </Box>
+      </Hidden>
     </>
   );
 };
