@@ -9,10 +9,13 @@ import {
   CardHeader
 } from '@material-ui/core';
 
+import { useParams } from 'react-router-dom';
+
 import { AppContext } from 'src/context';
 
-function ProductPageAdmin() {
+function ProductPageAdmin(props) {
   const { handleAddProductLink } = useContext(AppContext);
+  const { slug } = useParams();
 
   return (
     <>
@@ -41,7 +44,9 @@ function ProductPageAdmin() {
               <Button
                 color="primary"
                 variant="contained"
-                onClick={handleAddProductLink}
+                onClick={() => {
+                  handleAddProductLink(slug);
+                }}
               >
                 Add product link
               </Button>

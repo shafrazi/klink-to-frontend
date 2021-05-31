@@ -21,7 +21,7 @@ const routes = [
       { path: 'dashboard', element: <Dashboard /> },
       { path: 'products', element: <ProductList /> },
       { path: 'settings', element: <Settings /> },
-      { path: 'product-page-admin', element: <ProductPageAdmin /> },
+      { path: 'product-page-admin/:slug', element: <ProductPageAdmin /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },

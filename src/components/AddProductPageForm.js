@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-export default function AddProductPageForm() {
+function AddProductPageForm() {
   const classes = useStyles();
   const navigate = useNavigate();
   const { baseUrl, userToken, handleCloseModal } = useContext(AppContext);
@@ -49,9 +49,11 @@ export default function AddProductPageForm() {
     axios
       .post(url, productPage, options)
       .then((response) => {
-        console.log(response);
+        setProductPage(response.data);
         handleCloseModal();
-        navigate('/app/product-page-admin', { replace: true });
+        navigate(`/app/product-page-admin/${response.data.slug}`, {
+          replace: true
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -59,43 +61,51 @@ export default function AddProductPageForm() {
   };
 
   return (
-    <form className={classes.root} onSubmit={handleSubmit}>
-      <div>
-        <TextField
-          name="title"
-          label="Page name"
-          defaultValue={productPage.title}
-          variant="outlined"
-          fullWidth
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <TextField
-          name="description"
-          label="Description"
-          defaultValue={productPage.description}
-          variant="outlined"
-          multiline
-          rows={5}
-          fullWidth
-          onChange={handleChange}
-        />
-      </div>
-
-      <DialogActions>
-        <Button variant="contained" color="primary" size="large" type="submit">
-          Create Page
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          size="large"
-          onClick={handleCloseModal}
-        >
-          Cancel
-        </Button>
-      </DialogActions>
-    </form>
+    <div>
+      <form className={classes.root} onSubmit={handleSubmit}>
+        <div>
+          <TextField
+            name="title"
+            label="Page name"
+            defaultValue={productPage.title}
+            variant="outlined"
+            fullWidth
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <TextField
+            name="description"
+            label="Description"
+            defaultValue={productPage.description}
+            variant="outlined"
+            multiline
+            rows={5}
+            fullWidth
+            onChange={handleChange}
+          />
+        </div>
+        <DialogActions>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            type="submit"
+          >
+            Create Page
+          </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            size="large"
+            onClick={handleCloseModal}
+          >
+            Cancel
+          </Button>
+        </DialogActions>
+      </form>
+    </div>
   );
 }
+
+export default AddProductPageForm;

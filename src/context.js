@@ -25,9 +25,9 @@ function AppContextProvider(props) {
     setOpenModal(false);
   };
 
-  const handleAddProductLink = () => {
+  const handleAddProductLink = (slug) => {
     setOpenModal(true);
-    setChildComponent(<AddProductLinkForm />);
+    setChildComponent(<AddProductLinkForm slug={slug} />);
     setModalTitle('Add Product Link');
   };
 
