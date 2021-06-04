@@ -16,8 +16,6 @@ import { useParams } from 'react-router-dom';
 
 import { AppContext } from 'src/context';
 
-import ProductCard from 'src/components/product//ProductCard';
-import products from 'src/__mocks__/products';
 import ProductLink from 'src/components/ProductLink';
 
 function ProductPageAdmin(props) {

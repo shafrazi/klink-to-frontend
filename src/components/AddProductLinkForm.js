@@ -57,7 +57,6 @@ export default function AddProductLinkForm(props) {
           };
         });
         handleCloseModal();
-        // navigate('/app/product-page-admin', { replace: true });
       })
       .catch((error) => {
         console.log(error);
