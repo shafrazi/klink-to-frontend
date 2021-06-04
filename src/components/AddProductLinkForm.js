@@ -26,7 +26,8 @@ export default function AddProductLinkForm(props) {
   const classes = useStyles();
   const { slug } = props;
   const navigate = useNavigate();
-  const { baseUrl, userToken, handleCloseModal } = useContext(AppContext);
+  const { baseUrl, userToken, handleCloseModal, productPage, setProductPage } =
+    useContext(AppContext);
   const [productLink, setProductLink] = useState({ slug: slug });
 
   const handleChange = (event) => {
@@ -49,7 +50,12 @@ export default function AddProductLinkForm(props) {
     axios
       .post(url, productLink, options)
       .then((response) => {
-        console.log(response);
+        setProductPage((prevProductPage) => {
+          return {
+            ...prevProductPage,
+            link_items: [...prevProductPage.link_items, productLink]
+          };
+        });
         handleCloseModal();
         // navigate('/app/product-page-admin', { replace: true });
       })

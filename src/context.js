@@ -53,7 +53,8 @@ function AppContextProvider(props) {
         handleAddProductLink,
         handleProductPageCreate,
         modalTitle,
-        productPage
+        productPage,
+        setProductPage
       }}
     >
       {props.children}

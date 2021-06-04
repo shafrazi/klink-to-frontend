@@ -21,9 +21,14 @@ import products from 'src/__mocks__/products';
 import ProductLink from 'src/components/ProductLink';
 
 function ProductPageAdmin(props) {
-  const { handleAddProductLink, baseUrl, userToken } = useContext(AppContext);
+  const {
+    handleAddProductLink,
+    baseUrl,
+    userToken,
+    productPage,
+    setProductPage
+  } = useContext(AppContext);
   const { slug } = useParams();
-  const [productPage, setProductPage] = useState(null);
 
   const options = {
     headers: {
