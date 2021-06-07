@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import AddProductPageForm from 'src/components/AddProductPageForm';
 import AddProductLinkForm from 'src/components/AddProductLinkForm';
+import AddProductLink from 'src/components/AddProductLink';
 
 const AppContext = React.createContext(null);
 
@@ -29,7 +30,7 @@ function AppContextProvider(props) {
 
   const handleAddProductLink = (slug) => {
     setOpenModal(true);
-    setChildComponent(<AddProductLinkForm slug={slug} />);
+    setChildComponent(<AddProductLink slug={slug} />);
     setModalTitle('Add Product Link');
   };
 
