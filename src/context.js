@@ -14,6 +14,7 @@ function AppContextProvider(props) {
   const [ChildComponent, setChildComponent] = useState(null);
   const [modalTitle, setModalTitle] = useState(null);
   const [productPage, setProductPage] = useState(null);
+  const [productPages, setProductPages] = useState({});
 
   useEffect(() => {
     if (!userToken) {
@@ -54,7 +55,9 @@ function AppContextProvider(props) {
         handleProductPageCreate,
         modalTitle,
         productPage,
-        setProductPage
+        setProductPage,
+        productPages,
+        setProductPages
       }}
     >
       {props.children}

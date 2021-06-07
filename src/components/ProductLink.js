@@ -10,7 +10,6 @@ import {
 } from '@material-ui/core';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import watch from 'src/assets/products/watch.jpg';
 
 const ProductLink = ({ product, ...rest }) => {
   return (
