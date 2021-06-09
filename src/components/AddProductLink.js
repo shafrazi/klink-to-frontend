@@ -4,13 +4,25 @@ import Button from '@material-ui/core/Button';
 
 import DialogActions from '@material-ui/core/DialogActions';
 
-import { TextField, makeStyles, CircularProgress } from '@material-ui/core';
+import {
+  TextField,
+  makeStyles,
+  CircularProgress,
+  InputAdornment,
+  IconButton,
+  OutlinedInput,
+  InputLabel,
+  FormControl
+} from '@material-ui/core';
 
 import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
 
 import { AppContext } from 'src/context';
+import { Clear } from '@material-ui/icons';
+
+import ProductLinkFormCard from 'src/components/ProductLinkFormCard';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -30,6 +42,8 @@ export default function AddProductLink(props) {
     useContext(AppContext);
   const [productLink, setProductLink] = useState({ slug: slug });
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState(null);
+  const [isComplete, setIsComplete] = useState(false);
 
   const handleChange = (event) => {
     setProductLink((prevProductLink) => {
@@ -38,10 +52,34 @@ export default function AddProductLink(props) {
         [event.target.name]: event.target.value
       };
     });
+    console.log(productLink);
+  };
+
+  const clearText = () => {
+    setProductLink((prevProductLink) => {
+      return {
+        ...prevProductLink,
+        source: '',
+        title: '',
+        description: '',
+        price: '',
+        image: ''
+      };
+    });
   };
 
   const handleGetDetails = (event) => {
+    setProductLink((prevProductLink) => {
+      return {
+        ...prevProductLink,
+        image: '',
+        title: '',
+        description: '',
+        price: ''
+      };
+    });
     setLoading(true);
+    setIsComplete(false);
     const options = {
       headers: {
         Authorization: `bearer ${userToken}`
@@ -53,16 +91,23 @@ export default function AddProductLink(props) {
     axios
       .post(url, { url: productLink.source }, options)
       .then((response) => {
-        setProductLink((prevProductLink) => {
-          return {
-            ...prevProductLink,
-            ...response.data.data
-          };
-        });
+        if (response.data.data.is_complete) {
+          setIsComplete(true);
+          setProductLink((prevProductLink) => {
+            return {
+              ...prevProductLink,
+              ...response.data.data.item
+            };
+          });
+        } else {
+          setErrors('Invalid URL. Please try again.');
+        }
+
         setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -77,10 +122,11 @@ export default function AddProductLink(props) {
     axios
       .post(url, productLink, options)
       .then((response) => {
+        console.log(response);
         setProductPage((prevProductPage) => {
           return {
             ...prevProductPage,
-            link_items: [...prevProductPage.link_items, productLink]
+            link_items: [...prevProductPage.link_items, response.data]
           };
         });
         handleCloseModal();
@@ -94,13 +140,20 @@ export default function AddProductLink(props) {
     <div>
       <form className={classes.root}>
         <div>
-          <TextField
+          <OutlinedInput
+            id="source-input"
             name="source"
-            label="Target link"
-            defaultValue={productLink.source}
-            variant="outlined"
+            value={productLink.source || ''}
             fullWidth
             onChange={handleChange}
+            placeholder="Target link"
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton onClick={clearText} edge="end">
+                  {<Clear />}
+                </IconButton>
+              </InputAdornment>
+            }
           />
         </div>
 
@@ -126,7 +179,13 @@ export default function AddProductLink(props) {
         </DialogActions>
       </form>
       <div>
-        <img src={productLink.image} />
+        {isComplete && (
+          <ProductLinkFormCard
+            product={productLink}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
+        )}
       </div>
     </div>
   );

@@ -60,32 +60,11 @@ function ProductPageAdmin(props) {
         }}
       >
         <Container maxWidth={false}>
-          <Card>
-            <CardHeader subheader="Add product links" title="Product Page" />
-
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                p: 2
-              }}
-            >
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={() => {
-                  handleAddProductLink(slug);
-                }}
-              >
-                Add product link
-              </Button>
-            </Box>
-          </Card>
           <Box sx={{ pt: 3 }}>
             {productPage && (
               <Grid container spacing={6}>
                 {productPage.link_items.map((linkItem) => (
-                  <Grid item key={linkItem.id} lg={3} md={4} xs={12}>
+                  <Grid item key={linkItem.id} lg={2} md={3} xs={12}>
                     <ProductLink product={linkItem} />
                   </Grid>
                 ))}

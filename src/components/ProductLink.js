@@ -1,17 +1,26 @@
 import {
-  Avatar,
   Box,
   Card,
   CardContent,
   CardMedia,
   Divider,
   Grid,
-  Typography
+  Typography,
+  makeStyles
 } from '@material-ui/core';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import GetAppIcon from '@material-ui/icons/GetApp';
 
+const useStyles = makeStyles({
+  media: {
+    width: '80%',
+    height: '80%',
+    maxWidth: 300
+  }
+});
+
 const ProductLink = ({ product, ...rest }) => {
+  const classes = useStyles();
   return (
     <Card
       sx={{
@@ -34,6 +43,7 @@ const ProductLink = ({ product, ...rest }) => {
             image={product.image}
             component="img"
             title={product.title}
+            className={classes.media}
           />
         </Box>
         <Typography

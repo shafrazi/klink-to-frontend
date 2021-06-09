@@ -10,6 +10,7 @@ import ProductList from 'src/pages/ProductList';
 import Register from 'src/pages/Register';
 import Settings from 'src/pages/Settings';
 import ProductPageAdmin from './pages/ProductPageAdmin';
+import ProductPage from './pages/ProductPage';
 
 const routes = [
   {
@@ -31,6 +32,7 @@ const routes = [
     children: [
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
+      { path: ':slug', element: <ProductPage /> },
       { path: '404', element: <NotFound /> },
       { path: '/', element: <Navigate to="/app/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> }
