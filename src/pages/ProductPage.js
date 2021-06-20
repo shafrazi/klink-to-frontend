@@ -1,14 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import {
-  Box,
-  Container,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Grid
-} from '@material-ui/core';
+import { Box, Container, Grid } from '@material-ui/core';
 
 import axios from 'axios';
 
@@ -19,13 +11,8 @@ import { AppContext } from 'src/context';
 import ProductLink from 'src/components/ProductLink';
 
 function ProductPageAdmin(props) {
-  const {
-    handleAddProductLink,
-    baseUrl,
-    userToken,
-    productPage,
-    setProductPage
-  } = useContext(AppContext);
+  const { baseUrl, userToken, productPage, setProductPage } =
+    useContext(AppContext);
   const { slug } = useParams();
 
   const options = {
@@ -59,12 +46,12 @@ function ProductPageAdmin(props) {
           py: 3
         }}
       >
-        <Container maxWidth={false}>
+        <Container fixed>
           <Box sx={{ pt: 3 }}>
             {productPage && (
-              <Grid container spacing={6}>
+              <Grid container spacing={3}>
                 {productPage.link_items.map((linkItem) => (
-                  <Grid item key={linkItem.id} lg={2} md={3} xs={12}>
+                  <Grid item key={linkItem.id} lg={3} md={4} xs={6}>
                     <ProductLink product={linkItem} />
                   </Grid>
                 ))}

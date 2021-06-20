@@ -3,13 +3,10 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Divider,
-  Grid,
   Typography,
-  makeStyles
+  makeStyles,
+  Button
 } from '@material-ui/core';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import GetAppIcon from '@material-ui/icons/GetApp';
 
 const useStyles = makeStyles({
   media: {
@@ -59,44 +56,20 @@ const ProductLink = ({ product, ...rest }) => {
         </Typography>
       </CardContent>
       <Box sx={{ flexGrow: 1 }} />
-      <Divider />
-      <Box sx={{ p: 2 }}>
-        <Grid container spacing={2} sx={{ justifyContent: 'space-between' }}>
-          <Grid
-            item
-            sx={{
-              alignItems: 'center',
-              display: 'flex'
-            }}
-          >
-            <AccessTimeIcon color="action" />
-            <Typography
-              color="textSecondary"
-              display="inline"
-              sx={{ pl: 1 }}
-              variant="body2"
-            >
-              Updated 2hr ago
-            </Typography>
-          </Grid>
-          <Grid
-            item
-            sx={{
-              alignItems: 'center',
-              display: 'flex'
-            }}
-          >
-            <GetAppIcon color="action" />
-            <Typography
-              color="textSecondary"
-              display="inline"
-              sx={{ pl: 1 }}
-              variant="body2"
-            >
-              {product.totalDownloads} Downloads
-            </Typography>
-          </Grid>
-        </Grid>
+      <Box sx={{ display: 'flex', justifyContent: 'center', p: 2 }}>
+        <Button
+          color="primary"
+          variant="contained"
+          // component={Link}
+          // href={product.source}
+          // target="_blank"
+          onClick={() => {
+            window.open(product.source, '_blank');
+            console.log('ok');
+          }}
+        >
+          Go to link
+        </Button>
       </Box>
     </Card>
   );

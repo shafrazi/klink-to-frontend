@@ -28,7 +28,6 @@ const Dashboard = () => {
         .get(baseUrl + '/api/product_pages', options)
         .then((response) => {
           setProductPages(response.data);
-          console.log(response.data.pages);
         })
         .catch((error) => {
           console.log(error);

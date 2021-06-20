@@ -83,9 +83,9 @@ function ProductPageAdmin(props) {
           </Card>
           <Box sx={{ pt: 3 }}>
             {productPage && (
-              <Grid container spacing={6}>
+              <Grid container spacing={4}>
                 {productPage.link_items.map((linkItem) => (
-                  <Grid item key={linkItem.id} lg={3} md={4} xs={12}>
+                  <Grid item key={linkItem.id} lg={3} md={4} xs={6}>
                     <ProductLink product={linkItem} />
                   </Grid>
                 ))}

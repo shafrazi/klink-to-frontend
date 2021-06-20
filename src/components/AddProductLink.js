@@ -147,6 +147,7 @@ export default function AddProductLink(props) {
             fullWidth
             onChange={handleChange}
             placeholder="Target link"
+            autoFocus
             endAdornment={
               <InputAdornment position="end">
                 <IconButton onClick={clearText} edge="end">
