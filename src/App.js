@@ -18,7 +18,6 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       {routing}
-      {/* <ProductPageModal /> */}
       <Modal childComponent={ChildComponent} modalTitle={modalTitle} />
     </ThemeProvider>
   );
