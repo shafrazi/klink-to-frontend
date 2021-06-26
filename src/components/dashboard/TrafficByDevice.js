@@ -10,8 +10,9 @@ import {
   useTheme
 } from '@material-ui/core';
 import LaptopMacIcon from '@material-ui/icons/LaptopMac';
-import PhoneIcon from '@material-ui/icons/Phone';
+import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 import TabletIcon from '@material-ui/icons/Tablet';
+import DevicesOtherIcon from '@material-ui/icons/DevicesOther';
 
 const TrafficByDevice = (props) => {
   const theme = useTheme();
@@ -19,18 +20,24 @@ const TrafficByDevice = (props) => {
   const data = {
     datasets: [
       {
-        data: [63, 15, 22],
+        data: [
+          props.data.Desktop || 0,
+          props.data.Tablet || 0,
+          props.data.Mobile || 0,
+          props.data.Other || 0
+        ],
         backgroundColor: [
           colors.indigo[500],
           colors.red[600],
-          colors.orange[600]
+          colors.orange[600],
+          colors.cyan[600]
         ],
         borderWidth: 8,
         borderColor: colors.common.white,
         hoverBorderColor: colors.common.white
       }
     ],
-    labels: ['Desktop', 'Tablet', 'Mobile']
+    labels: ['Desktop', 'Tablet', 'Mobile', 'Other']
   };
 
   const options = {
@@ -58,21 +65,27 @@ const TrafficByDevice = (props) => {
   const devices = [
     {
       title: 'Desktop',
-      value: 63,
+      value: props.data.Desktop || 0,
       icon: LaptopMacIcon,
       color: colors.indigo[500]
     },
     {
       title: 'Tablet',
-      value: 15,
+      value: props.data.Tablet || 0,
       icon: TabletIcon,
       color: colors.red[600]
     },
     {
       title: 'Mobile',
-      value: 23,
-      icon: PhoneIcon,
+      value: props.data.Mobile || 0,
+      icon: PhoneIphoneIcon,
       color: colors.orange[600]
+    },
+    {
+      title: 'Other',
+      value: props.data.Other || 0,
+      icon: DevicesOtherIcon,
+      color: colors.cyan[600]
     }
   ];
 

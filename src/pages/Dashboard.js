@@ -16,6 +16,7 @@ import { AppContext } from 'src/context';
 const Dashboard = () => {
   const { productPages, setProductPages, baseUrl, userToken } =
     useContext(AppContext);
+  const [allDeviceTraffic, setAllDeviceTraffic] = useState(null);
   const options = {
     headers: {
       authorization: `bearer ${userToken}`
@@ -28,6 +29,19 @@ const Dashboard = () => {
         .get(baseUrl + '/api/product_pages', options)
         .then((response) => {
           setProductPages(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [userToken]);
+
+  useEffect(() => {
+    if (userToken) {
+      axios
+        .get(baseUrl + '/api/all_page_traffic', options)
+        .then((response) => {
+          setAllDeviceTraffic(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -65,7 +79,12 @@ const Dashboard = () => {
               <Sales />
             </Grid>
             <Grid item lg={4} md={6} xl={3} xs={12}>
-              <TrafficByDevice sx={{ height: '100%' }} />
+              {allDeviceTraffic && (
+                <TrafficByDevice
+                  sx={{ height: '100%' }}
+                  data={allDeviceTraffic}
+                />
+              )}
             </Grid>
             <Grid item lg={4} md={6} xl={3} xs={12}>
               <RecentProductPages
