@@ -10,27 +10,16 @@ import { green } from '@material-ui/core/colors';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import PeopleIcon from '@material-ui/icons/PeopleOutlined';
 
-const TotalCustomers = (props) => (
+const PageViews = (props) => (
   <Card {...props}>
     <CardContent>
-      <Grid
-        container
-        spacing={3}
-        sx={{ justifyContent: 'space-between' }}
-      >
+      <Grid container spacing={3} sx={{ justifyContent: 'space-between' }}>
         <Grid item>
-          <Typography
-            color="textSecondary"
-            gutterBottom
-            variant="h6"
-          >
-            TOTAL CUSTOMERS
+          <Typography color="textSecondary" gutterBottom variant="h6">
+            PAGE VIEWS
           </Typography>
-          <Typography
-            color="textPrimary"
-            variant="h3"
-          >
-            1,600
+          <Typography color="textPrimary" variant="h3">
+            {props.data}
           </Typography>
         </Grid>
         <Grid item>
@@ -62,10 +51,7 @@ const TotalCustomers = (props) => (
         >
           16%
         </Typography>
-        <Typography
-          color="textSecondary"
-          variant="caption"
-        >
+        <Typography color="textSecondary" variant="caption">
           Since last month
         </Typography>
       </Box>
@@ -73,4 +59,4 @@ const TotalCustomers = (props) => (
   </Card>
 );
 
-export default TotalCustomers;
+export default PageViews;

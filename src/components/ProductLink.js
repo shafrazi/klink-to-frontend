@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import {
   Box,
   Card,
@@ -7,6 +8,8 @@ import {
   makeStyles,
   Button
 } from '@material-ui/core';
+import { AppContext } from 'src/context';
+import axios from 'axios';
 
 const useStyles = makeStyles({
   media: {
@@ -18,6 +21,17 @@ const useStyles = makeStyles({
 
 const ProductLink = ({ product, ...rest }) => {
   const classes = useStyles();
+  const { baseUrl } = useContext(AppContext);
+
+  const createLinkItemData = () => {
+    axios
+      .post(baseUrl + '/api/link_item_data', { link_item_id: product.id })
+      .then((response) => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <Card
       sx={{
@@ -65,7 +79,7 @@ const ProductLink = ({ product, ...rest }) => {
           // target="_blank"
           onClick={() => {
             window.open(product.source, '_blank');
-            console.log('ok');
+            createLinkItemData();
           }}
         >
           Go to link
