@@ -5,7 +5,7 @@ import { Box, Container, Grid } from '@material-ui/core';
 import PageCount from 'src/components/dashboard/PageCount';
 import LatestOrders from 'src/components/dashboard//LatestOrders';
 import RecentProductPages from 'src/components/dashboard/RecentProductPages';
-import Sales from 'src/components/dashboard//Sales';
+import PageViewsChart from 'src/components/dashboard//PageViewsChart';
 import LinkCount from 'src/components/dashboard/LinkCount';
 import PageViews from 'src/components/dashboard/PageViews';
 import LinkViewCount from 'src/components/dashboard/LinkViewCount';
@@ -80,7 +80,7 @@ const Dashboard = () => {
                 />
               </Grid>
               <Grid item lg={8} md={12} xl={9} xs={12}>
-                <Sales />
+                <PageViewsChart data={dataOverview.weekly_page_views} />
               </Grid>
               <Grid item lg={4} md={6} xl={3} xs={12}>
                 <TrafficByDevice
