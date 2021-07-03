@@ -68,7 +68,7 @@ const Dashboard = () => {
                 <PageCount data={dataOverview.page_count} />
               </Grid>
               <Grid item lg={3} sm={6} xl={3} xs={12}>
-                <PageViews data={dataOverview.all_views} />
+                <PageViews data={dataOverview} />
               </Grid>
               <Grid item lg={3} sm={6} xl={3} xs={12}>
                 <LinkCount data={dataOverview.link_count} />
@@ -80,7 +80,7 @@ const Dashboard = () => {
                 />
               </Grid>
               <Grid item lg={8} md={12} xl={9} xs={12}>
-                <PageViewsChart data={dataOverview.weekly_page_views} />
+                <PageViewsChart data={dataOverview.page_views} />
               </Grid>
               <Grid item lg={4} md={6} xl={3} xs={12}>
                 <TrafficByDevice

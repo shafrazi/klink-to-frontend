@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
   Box,
@@ -7,22 +8,25 @@ import {
   CardHeader,
   Divider,
   useTheme,
-  colors
+  colors,
+  NativeSelect
 } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 const PageViewsChart = (props) => {
+  const { weekly_page_views } = props.data;
   const theme = useTheme();
+  const [timePeriod, setTimePeriod] = useState(weekly_page_views);
 
   const data = {
     datasets: [
       {
         backgroundColor: colors.indigo[500],
-        data: Object.values(props.data)
+        data: Object.values(timePeriod)
       }
     ],
-    labels: Object.keys(props.data)
+    labels: Object.keys(timePeriod)
   };
 
   const options = {
@@ -80,13 +84,22 @@ const PageViewsChart = (props) => {
     }
   };
 
+  const handleChange = (event) => {
+    setTimePeriod(props.data[event.target.value]);
+  };
+
   return (
     <Card {...props}>
       <CardHeader
         action={
-          <Button endIcon={<ArrowDropDownIcon />} size="small" variant="text">
-            Last 7 days
-          </Button>
+          <NativeSelect
+            name="timePeriod"
+            inputProps={{ 'aria-label': 'timePeriod' }}
+            onChange={handleChange}
+          >
+            <option value={'weekly_page_views'}>Last 7 days</option>
+            <option value={'monthly_page_views'}>Last 12 months</option>
+          </NativeSelect>
         }
         title="Page Views"
       />

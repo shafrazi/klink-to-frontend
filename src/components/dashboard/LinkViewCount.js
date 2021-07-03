@@ -1,6 +1,6 @@
 import { Avatar, Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { indigo } from '@material-ui/core/colors';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import TouchAppIcon from '@material-ui/icons/TouchApp';
 
 const LinkViewCount = (props) => (
   <Card {...props}>
@@ -22,7 +22,7 @@ const LinkViewCount = (props) => (
               width: 56
             }}
           >
-            <AttachMoneyIcon />
+            <TouchAppIcon />
           </Avatar>
         </Grid>
       </Grid>

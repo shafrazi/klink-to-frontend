@@ -8,7 +8,7 @@ import {
   Typography
 } from '@material-ui/core';
 import { orange } from '@material-ui/core/colors';
-import InsertChartIcon from '@material-ui/icons/InsertChartOutlined';
+import LinkIcon from '@material-ui/icons/Link';
 
 const LinkCount = (props) => (
   <Card sx={{ height: '100%' }} {...props}>
@@ -30,7 +30,7 @@ const LinkCount = (props) => (
               width: 56
             }}
           >
-            <InsertChartIcon />
+            <LinkIcon />
           </Avatar>
         </Grid>
       </Grid>
