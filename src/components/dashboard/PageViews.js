@@ -11,8 +11,6 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import PageviewIcon from '@material-ui/icons/Pageview';
 
 const PageViews = (props) => {
-  console.log(props.data.page_views.views_by_week);
-
   return (
     <Card {...props}>
       <CardContent>

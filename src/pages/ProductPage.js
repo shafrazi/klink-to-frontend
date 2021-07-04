@@ -4,7 +4,7 @@ import { Box, Container, Grid } from '@material-ui/core';
 
 import axios from 'axios';
 
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { AppContext } from 'src/context';
 
@@ -14,6 +14,7 @@ function ProductPageAdmin(props) {
   const { baseUrl, userToken, productPage, setProductPage } =
     useContext(AppContext);
   const { slug } = useParams();
+  const navigate = useNavigate();
 
   const options = {
     headers: {
@@ -30,6 +31,9 @@ function ProductPageAdmin(props) {
         })
         .catch((error) => {
           console.log(error);
+          navigate('/404', {
+            replace: true
+          });
         });
     }
   }, [userToken]);

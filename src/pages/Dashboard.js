@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { Box, Container, Grid } from '@material-ui/core';
 import PageCount from 'src/components/dashboard/PageCount';
-import LatestOrders from 'src/components/dashboard//LatestOrders';
+import Pages from 'src/components/dashboard/Pages';
 import RecentProductPages from 'src/components/dashboard/RecentProductPages';
 import PageViewsChart from 'src/components/dashboard//PageViewsChart';
 import LinkCount from 'src/components/dashboard/LinkCount';
@@ -95,7 +95,7 @@ const Dashboard = () => {
                 />
               </Grid>
               <Grid item lg={8} md={12} xl={9} xs={12}>
-                <LatestOrders />
+                <Pages data={productPages} />
               </Grid>
             </Grid>
           </Container>
