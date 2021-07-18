@@ -40,6 +40,13 @@ function AppContextProvider(props) {
     setModalTitle('Create Product Page');
   };
 
+  const getDiffPercentage = (data) => {
+    let outputArray = [];
+    const latest = Object.values(data);
+    const last = Object.values(data);
+    return latest;
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -58,7 +65,8 @@ function AppContextProvider(props) {
         productPage,
         setProductPage,
         productPages,
-        setProductPages
+        setProductPages,
+        getDiffPercentage
       }}
     >
       {props.children}

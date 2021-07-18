@@ -1,3 +1,4 @@
+import { React, useContext } from 'react';
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -17,9 +18,12 @@ import {
   Tooltip
 } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import LaunchIcon from '@material-ui/icons/Launch';
+import { Link } from 'react-router-dom';
+import { AppContext } from 'src/context';
 
 const Pages = (props) => {
-  const pages = props.data.pages;
+  const pages = props.data;
 
   return (
     <Card {...props}>
@@ -31,7 +35,7 @@ const Pages = (props) => {
             <TableHead>
               <TableRow>
                 <TableCell>Page name</TableCell>
-                <TableCell>Page link</TableCell>
+                <TableCell>Public link</TableCell>
                 <TableCell sortDirection="desc">
                   <Tooltip enterDelay={300} title="Sort">
                     <TableSortLabel active direction="desc">
@@ -42,20 +46,30 @@ const Pages = (props) => {
                 <TableCell>Views this week</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {pages.map((page) => (
-                <TableRow hover key={page.id}>
-                  <TableCell>{page.title}</TableCell>
-                  <TableCell>{`https://klink.to/${page.slug}`}</TableCell>
-                  <TableCell>
-                    {moment(page.created_at).format('DD/MM/YYYY')}
-                  </TableCell>
-                  <TableCell>
-                    <Chip color="primary" label={page.slug} size="small" />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
+            {pages && (
+              <TableBody>
+                {pages.map((page) => (
+                  <TableRow hover key={page.id}>
+                    <TableCell>
+                      <Link
+                        to={`/app/product-page-admin/${page.attributes.slug}`}
+                      >
+                        {page.attributes.title}
+                      </Link>
+                    </TableCell>
+                    <TableCell>
+                      <Link to={`/${page.attributes.slug}`} target="_blank">
+                        {`https://klink.to/${page.attributes.slug}`}
+                      </Link>
+                    </TableCell>
+                    <TableCell>
+                      {moment(page.attributes.created_at).format('DD/MM/YYYY')}
+                    </TableCell>
+                    <TableCell>{page.attributes.weekly_views}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            )}
           </Table>
         </Box>
       </PerfectScrollbar>

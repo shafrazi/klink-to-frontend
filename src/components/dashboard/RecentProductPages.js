@@ -62,8 +62,8 @@ const RecentProductPages = (props) => {
             <ListItem divider={i < pages.length - 1} key={page.id}>
               <ListItemAvatar>
                 <img
-                  alt={page.title}
-                  src={page.image}
+                  alt={page.attributes.title}
+                  src={page.attributes.Boximage}
                   style={{
                     height: 48,
                     width: 48
@@ -71,11 +71,11 @@ const RecentProductPages = (props) => {
                 />
               </ListItemAvatar>
               <ListItemText
-                primary={page.title}
+                primary={page.attributes.title}
                 // secondary={`Updated ${page.updatedAt.fromNow()}`}
               />
               <IconButton edge="end" size="small">
-                <Link to={`/app/product-page-admin/${page.slug}`}>
+                <Link to={`/app/product-page-admin/${page.attributes.slug}`}>
                   <MoreVertIcon />
                 </Link>
               </IconButton>

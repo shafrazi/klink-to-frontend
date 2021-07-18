@@ -6,36 +6,41 @@ import {
   Grid,
   Typography
 } from '@material-ui/core';
+import { useContext } from 'react';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import { red } from '@material-ui/core/colors';
+import { AppContext } from 'src/context';
 
-const PageCount = (props) => (
-  <Card sx={{ height: '100%' }} {...props}>
-    <CardContent>
-      <Grid container spacing={3} sx={{ justifyContent: 'space-between' }}>
-        <Grid item>
-          <Typography color="textSecondary" gutterBottom variant="h6">
-            TOTAL PAGES
-          </Typography>
-          <Typography color="textPrimary" variant="h3">
-            {props.data}
-          </Typography>
+const PageCount = (props) => {
+  const { getDiffPercentage, productPages } = useContext(AppContext);
+  return (
+    <Card sx={{ height: '100%' }} {...props}>
+      <CardContent>
+        <Grid container spacing={3} sx={{ justifyContent: 'space-between' }}>
+          <Grid item>
+            <Typography color="textSecondary" gutterBottom variant="h6">
+              TOTAL PAGES
+            </Typography>
+            <Typography color="textPrimary" variant="h3">
+              {props.data}
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Avatar
+              sx={{
+                backgroundColor: red[600],
+                height: 56,
+                width: 56
+              }}
+            >
+              <MenuBookIcon />
+            </Avatar>
+          </Grid>
         </Grid>
-        <Grid item>
-          <Avatar
-            sx={{
-              backgroundColor: red[600],
-              height: 56,
-              width: 56
-            }}
-          >
-            <MenuBookIcon />
-          </Avatar>
-        </Grid>
-      </Grid>
-    </CardContent>
-  </Card>
-);
+      </CardContent>
+    </Card>
+  );
+};
 
 export default PageCount;

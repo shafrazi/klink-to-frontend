@@ -28,7 +28,7 @@ const Dashboard = () => {
       axios
         .get(baseUrl + '/api/product_pages', options)
         .then((response) => {
-          setProductPages(response.data);
+          setProductPages(response.data.pages.data);
         })
         .catch((error) => {
           console.log(error);
@@ -88,14 +88,8 @@ const Dashboard = () => {
                   data={dataOverview.all_page_traffic}
                 />
               </Grid>
-              <Grid item lg={4} md={6} xl={3} xs={12}>
-                <RecentProductPages
-                  pages={productPages.pages}
-                  sx={{ height: '100%' }}
-                />
-              </Grid>
-              <Grid item lg={8} md={12} xl={9} xs={12}>
-                <Pages data={productPages} />
+              <Grid item lg={12} md={12} xl={12} xs={12}>
+                {productPages && <Pages data={productPages} />}
               </Grid>
             </Grid>
           </Container>

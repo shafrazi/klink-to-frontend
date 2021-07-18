@@ -62,10 +62,17 @@ const ProductLink = ({ product, ...rest }) => {
           color="textPrimary"
           gutterBottom
           variant="h4"
+          noWrap
         >
           {product.title}
         </Typography>
-        <Typography align="center" color="textPrimary" variant="body1">
+        <Typography
+          align="center"
+          color="textPrimary"
+          variant="body2"
+          noWrap
+          paragraph
+        >
           {product.description}
         </Typography>
       </CardContent>
