@@ -46,7 +46,7 @@ const Pages = (props) => {
                 <TableCell>Views this week</TableCell>
               </TableRow>
             </TableHead>
-            {pages && (
+            {pages.length > 0 && (
               <TableBody>
                 {pages.map((page) => (
                   <TableRow hover key={page.id}>

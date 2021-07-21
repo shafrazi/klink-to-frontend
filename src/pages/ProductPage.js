@@ -23,6 +23,7 @@ function ProductPageAdmin(props) {
   };
 
   useEffect(() => {
+    setProductPage(null);
     if (userToken) {
       axios
         .get(baseUrl + `/api/product_pages/${slug}`, options)
